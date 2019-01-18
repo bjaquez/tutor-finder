@@ -1,12 +1,45 @@
 import React from "react";
 import { Map } from "core-js";
 import Navbar from "./Navbar";
+import axios from "axios";
 
 
 export default class TutorProfile extends React.Component {
     state = {
         tutorInfo: { name: "bianca", rate: 20, city: "Hawthorne", subjects: ["Math", "Coding"], contact: { phone: 3105555555, email: "email@email.com" }, bio: "blahblah blah blah", rating: 3 },
         edit: false
+    }
+
+    componentDidMount = () => {
+        this.getInfo();
+    }
+
+    getInfo = () => {
+        console.log("getInfo");
+        let obj = {
+            typeId: 0,
+            login: {
+                username: "john123",
+                password: "123456"
+            },
+            name: "John Smith",
+            rate: 20,
+            rating: 4,
+            availability: ["Monday", "Tuesday"],
+            bio: "asdfksdjflaskdjflsdjf",
+            picture: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRDphtIVX-WHoArx-drzMWzNOpVh1S82bvZ16WvsK3wzJRH8M9",
+            subject: ["Math", "Chemistry"],
+            city: "Torrance",
+            contact: {
+                phoneNumber: 3109853673,
+                email: "john@example.com"
+            }
+        }
+
+        axios.post("/save", obj)
+            .then(data => {
+                console.log(data);
+            })
     }
 
     editProfileInputs = (name, value) => {
@@ -90,7 +123,7 @@ export default class TutorProfile extends React.Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-2">
-                    <Navbar/>
+                        <Navbar />
                     </div>
                     <div className="col-md-10">
                         <div className="row justify-content-center">
@@ -133,4 +166,5 @@ export default class TutorProfile extends React.Component {
             </div>
         )
     }
+
 }
