@@ -11,7 +11,7 @@ export default class TutorProfile extends React.Component {
     }
 
     componentDidMount = () => {
-        this.getInfo();
+        // this.getInfo();
     }
 
     getInfo = () => {
